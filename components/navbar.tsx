@@ -1,6 +1,7 @@
-'use client'
+"use client"
 
 import { useState, useEffect } from 'react'
+import { useSession, signOut } from 'next-auth/react'
 import { Button } from '@/components/ui/button'
 import { Menu, X, Moon, Sun } from 'lucide-react'
 
@@ -67,6 +68,8 @@ export function Navbar() {
             >
               {isOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </Button>
+            {/* Auth buttons */}
+            <AuthButtons />
           </div>
         </div>
 
@@ -103,3 +106,33 @@ export function Navbar() {
     </nav>
   )
 }
+
+  function AuthButtons() {
+    const { data: session, status } = useSession()
+
+    if (status === 'loading') {
+      return null
+    }
+
+    if (session) {
+      return (
+        <div className="hidden md:flex items-center gap-2">
+          <span className="text-sm text-muted-foreground">{session.user?.name}</span>
+          <Button size="sm" onClick={() => signOut()}>
+            Sign out
+          </Button>
+        </div>
+      )
+    }
+
+    return (
+      <div className="hidden md:flex items-center gap-2">
+        <Button size="sm" variant="ghost" asChild>
+          <a href="/auth">Log in</a>
+        </Button>
+        <Button size="sm" asChild>
+          <a href="/auth">Sign up</a>
+        </Button>
+      </div>
+    )
+  }
