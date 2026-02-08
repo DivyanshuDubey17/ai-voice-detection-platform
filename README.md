@@ -12,7 +12,11 @@ A modern, responsive full-stack web application for detecting AI-generated voice
 - **Responsive Design**: Works seamlessly on desktop, tablet, and mobile
 - **Dark/Light Mode**: User preference-based theme switching
 - **API Integration**: Complete REST API for programmatic access
-- **Comprehensive Documentation**: Full API docs and use case examples
+- **Comprehensive Documentation**: Use case examples and deployment guides
+
+## Deploy from GitHub
+
+The repo is ready to deploy: push to GitHub, then connect it to [Vercel](https://vercel.com) (or another host). See **[DEPLOY_FROM_GITHUB.md](DEPLOY_FROM_GITHUB.md)** for step-by-step instructions and required environment variables.
 
 ## Tech Stack
 
@@ -32,8 +36,6 @@ A modern, responsive full-stack web application for detecting AI-generated voice
 │   ├── api/
 │   │   └── voice-detect/
 │   │       └── route.ts        # Voice detection API endpoint
-│   ├── api-docs/
-│   │   └── page.tsx            # API documentation page
 │   ├── contact/
 │   │   └── page.tsx            # Contact page
 │   ├── privacy/

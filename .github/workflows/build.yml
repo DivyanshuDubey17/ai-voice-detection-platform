@@ -1,0 +1,30 @@
+# Verify the project builds so it's ready to deploy from GitHub
+name: Build
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+        env:
+          # Placeholders so CI build succeeds; set real values in Vercel/host
+          NEXTAUTH_SECRET: build-placeholder-for-ci
+          NEXTAUTH_URL: http://localhost:3000
