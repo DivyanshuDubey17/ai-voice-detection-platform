@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import { signIn } from "next-auth/react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
@@ -27,7 +27,7 @@ import { Loader2 } from "lucide-react";
 
 const CLASS_OPTIONS = Array.from({ length: 12 }, (_, i) => `Class ${i + 1}`);
 
-export default function AuthPage() {
+function AuthPageContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const callbackUrl = searchParams.get("callbackUrl") ?? "/";
@@ -324,5 +324,30 @@ export default function AuthPage() {
         </Card>
       </div>
     </div>
+  );
+}
+
+function AuthPageFallback() {
+  return (
+    <div className="min-h-screen bg-background text-foreground flex flex-col items-center justify-center p-4">
+      <div className="w-full max-w-md flex flex-col items-center gap-4">
+        <div className="flex items-center justify-center gap-2">
+          <div className="w-10 h-10 bg-gradient-to-br from-primary to-secondary rounded-lg flex items-center justify-center">
+            <span className="text-lg font-bold text-primary-foreground">V</span>
+          </div>
+          <span className="font-bold text-xl">VoiceDetect</span>
+        </div>
+        <Loader2 className="h-8 w-8 animate-spin text-muted-foreground" />
+        <p className="text-sm text-muted-foreground">Loading...</p>
+      </div>
+    </div>
+  );
+}
+
+export default function AuthPage() {
+  return (
+    <Suspense fallback={<AuthPageFallback />}>
+      <AuthPageContent />
+    </Suspense>
   );
 }
