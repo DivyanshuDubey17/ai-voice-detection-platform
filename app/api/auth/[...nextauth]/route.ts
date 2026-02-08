@@ -2,6 +2,7 @@ import NextAuth from "next-auth"
 import GoogleProvider from "next-auth/providers/google"
 import CredentialsProvider from "next-auth/providers/credentials"
 import { verifyCredentials } from "@/lib/auth-store"
+import { recordSignIn } from "@/lib/signin-log"
 
 /*
   NextAuth with Google + Email/Password.
@@ -39,6 +40,15 @@ const handler = NextAuth({
   },
   pages: {
     signIn: "/auth",
+  },
+  events: {
+    signIn: ({ user, account }) => {
+      recordSignIn({
+        email: user.email ?? "unknown",
+        name: user.name ?? null,
+        provider: account?.provider ?? "unknown",
+      })
+    },
   },
 })
 

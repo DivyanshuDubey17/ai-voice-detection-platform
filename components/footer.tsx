@@ -30,11 +30,6 @@ export function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/api-docs" className="text-sm text-muted-foreground hover:text-foreground transition">
-                  API Docs
-                </Link>
-              </li>
-              <li>
                 <Link href="/#features" className="text-sm text-muted-foreground hover:text-foreground transition">
                   Features
                 </Link>

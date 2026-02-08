@@ -39,14 +39,6 @@ export function HeroSection() {
             >
               Start Detecting <ArrowRight className="w-5 h-5" />
             </Button>
-            <Button
-              size="lg"
-              variant="outline"
-              className="gap-2 rounded-lg bg-transparent"
-              onClick={() => window.location.href = '/api-docs'}
-            >
-              View API Docs
-            </Button>
           </div>
 
           {/* Stats */}

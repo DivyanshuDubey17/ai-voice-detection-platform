@@ -43,9 +43,6 @@ export function Navbar() {
             <a href="#use-cases" className="text-sm text-muted-foreground hover:text-foreground transition">
               Use Cases
             </a>
-            <a href="/api-docs" className="text-sm text-muted-foreground hover:text-foreground transition">
-              API Docs
-            </a>
           </div>
 
           {/* Right Actions */}
@@ -94,12 +91,6 @@ export function Navbar() {
             >
               Use Cases
             </a>
-            <a
-              href="/api-docs"
-              className="block px-3 py-2 text-sm text-muted-foreground hover:text-foreground hover:bg-muted rounded-lg transition"
-            >
-              API Docs
-            </a>
           </div>
         )}
       </div>
@@ -116,8 +107,8 @@ export function Navbar() {
 
     if (session) {
       return (
-        <div className="hidden md:flex items-center gap-2">
-          <span className="text-sm text-muted-foreground">{session.user?.name}</span>
+        <div className="flex items-center gap-2">
+          <span className="text-sm text-muted-foreground truncate max-w-[120px]">{session.user?.name}</span>
           <Button size="sm" onClick={() => signOut()}>
             Sign out
           </Button>
@@ -126,13 +117,20 @@ export function Navbar() {
     }
 
     return (
-      <div className="hidden md:flex items-center gap-2">
-        <Button size="sm" variant="ghost" asChild>
-          <a href="/auth">Log in</a>
-        </Button>
-        <Button size="sm" asChild>
-          <a href="/auth">Sign up</a>
-        </Button>
-      </div>
+      <>
+        <div className="hidden md:flex items-center gap-2">
+          <Button size="sm" variant="ghost" asChild>
+            <a href="/auth">Log in</a>
+          </Button>
+          <Button size="sm" asChild>
+            <a href="/auth">Sign up</a>
+          </Button>
+        </div>
+        <div className="md:hidden">
+          <Button size="sm" asChild>
+            <a href="/auth">Log in</a>
+          </Button>
+        </div>
+      </>
     )
   }

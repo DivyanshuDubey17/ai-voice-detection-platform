@@ -65,6 +65,7 @@ export function VoiceDetectionTool() {
         resolve(result.split(',')[1]) // Remove data:audio/mp3;base64, prefix
       }
       reader.onerror = reject
+      reader.readAsDataURL(file)  // <-- add this line
     })
   }
 
@@ -382,12 +383,6 @@ export function VoiceDetectionTool() {
                 >
                   <RotateCcw className="w-4 h-4" />
                   Analyze Another
-                </Button>
-                <Button
-                  className="flex-1 rounded-lg bg-primary hover:bg-primary/90 text-primary-foreground"
-                  onClick={() => (window.location.href = '/api-docs')}
-                >
-                  Integrate API
                 </Button>
               </div>
             </div>
